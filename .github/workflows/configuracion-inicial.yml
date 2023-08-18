@@ -1,0 +1,30 @@
+name: Configuración Inicial del Curso
+
+on:
+  workflow_run:
+    workflows: ["Crear Estructura de Curso"]
+    types:
+      - completed
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Configurar Usuario y Correo Electrónico de Git
+      run: |
+        git config user.email "dsaavedra88@gmail.com"
+        git config user.name "statick88"
+
+    - name: Eliminar README.md
+      run: |
+        git rm -f README.md
+        git commit -m "Eliminar varios archivos" || true
+
+    - name: Renombrar NEW_COURSE.md a README.md
+      run: |
+        mv NEW_COURSE.md README.md
+        git add README.md
+        git commit -m "Renombrar NEW_COURSE.md a README.md"
