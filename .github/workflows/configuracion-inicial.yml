@@ -1,5 +1,4 @@
 name: Configuración Inicial del Curso
-
 on:
   workflow_run:
     workflows: ["Crear Estructura de Curso"]
